@@ -2,9 +2,173 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="TestProject.GUI.MainWindow"
-        Title="TestProject.GUI">
-    Welcome to Avalonia!
+        xmlns:vm="clr-namespace:TestProject.Core;assembly=TestProject.Core"
+        xmlns:converters="clr-namespace:TestProject.Avalonia.Converters"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
+        x:Class="TestProject.Avalonia.MainWindow"
+        x:DataType="vm:TestProjectModel"
+        Title="{Binding Title}"
+        Background="#f0f0f0"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+    </Window.Resources>
+      
+    <Window.Styles>
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BoxShadow" Value="0 2 10 0 #15000000"/>
+            <Setter Property="Margin" Value="0 0 0 15"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+        <Style Selector="TextBlock.header">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0 0 0 10"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Padding" Value="12 8"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#1976D2"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Padding" Value="8 6"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+    </Window.Styles>
     
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header with Status -->
+        <Border Grid.Row="0" Classes="card">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <TextBlock Classes="header" Text="MQTT Connection Status"/>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Ellipse Width="12" Height="12" Fill="{Binding IsConnected, Converter={StaticResource BoolToColorConverter}}"/>
+                        <TextBlock Text="{Binding Status}" VerticalAlignment="Center" FontWeight="Medium"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Host}" FontWeight="Medium"/>
+                    <TextBlock Text=":" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Port}" FontWeight="Medium"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Connection Settings -->
+        <Border Grid.Row="1" Classes="card">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Classes="header" Text="Connection Settings"/>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                        <StackPanel>
+                            <TextBlock Text="Host" Margin="0 0 0 4"/>
+                            <TextBox Text="{Binding Host}" Width="200"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Port" Margin="0 0 0 4"/>
+                            <TextBox Text="{Binding Port}" Width="80"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Bottom">
+                        <Button Classes="primary" Content="Connect" Command="{Binding ConnectCommand}"/>
+                        <Button Content="Disconnect" Command="{Binding DisconnectCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Publish Controls -->
+        <Border Grid.Row="2" Classes="card">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Classes="header" Text="Publish Message"/>
+                
+                <Button Grid.Row="1" 
+                        Classes="primary"
+                        Content="Publish 'Hello' to house/kitchen/status" 
+                        Command="{Binding PublishHelloCommand}"
+                        IsEnabled="{Binding IsConnected}"/>
+            </Grid>
+        </Border>
+
+        <!-- Messages Display -->
+        <Border Grid.Row="3" Classes="card">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Classes="header" Text="Message Log"/>
+                
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <Border Background="#f8f8f8"
+                            BorderBrush="#e0e0e0"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="10">
+                        <TextBlock Text="{Binding LastMessage}" 
+                                   TextWrapping="Wrap"
+                                   FontFamily="Consolas"
+                                   FontSize="14"
+                                   FontWeight="Medium"/>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="4" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,5,0,0"
+                   Orientation="Horizontal"
+                   Spacing="5">
+            <TextBlock Text="IoT Planner - MQTT Client" 
+                       FontSize="12"
+                       Foreground="Gray"/>
+            <TextBlock Text="•" 
+                       FontSize="12"
+                       Foreground="Gray"/>
+            <TextBlock Text="v1.0" 
+                       FontSize="12"
+                       Foreground="Gray"/>
+        </StackPanel>
+    </Grid>
 </Window>
