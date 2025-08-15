@@ -3,23 +3,26 @@ using Avalonia.Media;
 using System;
 using System.Globalization;
 
-namespace TestProject.Avalonia.Converters;
-
-public class BoolToColorConverter : IValueConverter
+namespace TestProject.GUI.Converters
 {
-    public static readonly BoolToColorConverter Instance = new();
-
-    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public class BoolToColorConverter : IValueConverter
     {
-        if (value is bool isConnected)
+        public static readonly BoolToColorConverter Instance = new();
+
+        // Convert boolean sensor/connection states to IBrush for UI (true -> green, false -> red)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return isConnected ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
-        }
-        return new SolidColorBrush(Colors.Gray);
-    }
+            bool flag = false;
+            if (value is bool b) flag = b;
+            else if (value is string s && bool.TryParse(s, out var parsed)) flag = parsed;
 
-    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+            return flag ? (IBrush)new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
+        }
+
+        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            // Not needed for one-way bindings; throw or attempt best-effort
+            throw new NotSupportedException();
+        }
     }
 }

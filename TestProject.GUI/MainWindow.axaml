@@ -3,13 +3,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:TestProject.Core;assembly=TestProject.Core"
-        xmlns:converters="clr-namespace:TestProject.Avalonia.Converters"
+        xmlns:converters="clr-namespace:TestProject.GUI.Converters"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
-        x:Class="TestProject.Avalonia.MainWindow"
+        x:Class="TestProject.GUI.MainWindow"
         x:DataType="vm:TestProjectModel"
-        Title="{Binding Title}"
+        Title="IoT Sensor Manager"
         Background="#f0f0f0"
         WindowStartupLocation="CenterScreen">
+
 
     <Window.Resources>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
@@ -40,11 +41,18 @@
             <Setter Property="Padding" Value="8 6"/>
             <Setter Property="CornerRadius" Value="4"/>
         </Style>
+        <Style Selector="Border.sensor">
+            <Setter Property="Background" Value="#f8f8f8"/>
+            <Setter Property="BorderBrush" Value="#e0e0e0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+        </Style>
     </Window.Styles>
     
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -60,7 +68,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel Grid.Column="0">
-                    <TextBlock Classes="header" Text="MQTT Connection Status"/>
+                    <TextBlock Classes="header" Text="IoT Hub Connection"/>
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <Ellipse Width="12" Height="12" Fill="{Binding IsConnected, Converter={StaticResource BoolToColorConverter}}"/>
                         <TextBlock Text="{Binding Status}" VerticalAlignment="Center" FontWeight="Medium"/>
@@ -68,14 +76,13 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Host}" FontWeight="Medium"/>
-                    <TextBlock Text=":" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Port}" FontWeight="Medium"/>
+                    <Button Classes="primary" Content="Connect" Command="{Binding ConnectCommand}" IsVisible="{Binding !IsConnected}"/>
+                    <Button Content="Disconnect" Command="{Binding DisconnectCommand}" IsVisible="{Binding IsConnected}"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <!-- Connection Settings -->
+        <!-- Sensor Display -->
         <Border Grid.Row="1" Classes="card">
             <Grid>
                 <Grid.RowDefinitions>
@@ -83,60 +90,123 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 
-                <TextBlock Grid.Row="0" Classes="header" Text="Connection Settings"/>
+                <TextBlock Grid.Row="0" Classes="header" Text="Sensor Readings"/>
                 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     
-                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
-                        <StackPanel>
-                            <TextBlock Text="Host" Margin="0 0 0 4"/>
-                            <TextBox Text="{Binding Host}" Width="200"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock Text="Port" Margin="0 0 0 4"/>
-                            <TextBox Text="{Binding Port}" Width="80"/>
-                        </StackPanel>
-                    </StackPanel>
+                    <!-- Light Sensor -->
+                    <Border Grid.Column="0" Classes="sensor">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Text="Light Sensor" FontWeight="Bold" Margin="0 0 0 10"/>
+                            
+                            <Border Grid.Row="1" 
+                                    Background="{Binding LightSensorValue, Converter={StaticResource BoolToColorConverter}}" 
+                                    Height="40" 
+                                    CornerRadius="4"
+                                    Margin="0 0 0 10"/>
+                            
+                            <TextBlock Grid.Row="2" 
+                                       Text="{Binding LightSensorText}" 
+                                       HorizontalAlignment="Center" 
+                                       FontSize="24"
+                                       FontWeight="Bold"/>
+                            
+                            <Button Grid.Row="3" 
+                                    Content="Toggle Value" 
+                                    Command="{Binding ToggleLightSensorCommand}"
+                                    HorizontalAlignment="Center"
+                                    Margin="0 10 0 0"/>
+                        </Grid>
+                    </Border>
                     
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Bottom">
-                        <Button Classes="primary" Content="Connect" Command="{Binding ConnectCommand}"/>
-                        <Button Content="Disconnect" Command="{Binding DisconnectCommand}"/>
-                    </StackPanel>
+                    <!-- Vibration Sensor -->
+                    <Border Grid.Column="1" Classes="sensor">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Text="Vibration Sensor" FontWeight="Bold" Margin="0 0 0 10"/>
+                            
+                            <Border Grid.Row="1" 
+                                    Background="{Binding VibrationSensorValue, Converter={StaticResource BoolToColorConverter}}" 
+                                    Height="40" 
+                                    CornerRadius="4"
+                                    Margin="0 0 0 10"/>
+                            
+                            <!-- Vibration Sensor - complete the TextBlock and Button -->
+                            <TextBlock Grid.Row="2" 
+                                    Text="{Binding VibrationSensorText}" 
+                                    HorizontalAlignment="Center" 
+                                    FontSize="24"
+                                    FontWeight="Bold"/>
+
+                            <Button Grid.Row="3" 
+                                    Content="Toggle Value" 
+                                    Command="{Binding ToggleVibrationSensorCommand}"
+                                    HorizontalAlignment="Center"
+                                    Margin="0 10 0 0"/>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- Motion Sensor -->
+                    <Border Grid.Column="2" Classes="sensor">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="1" 
+                                    Background="{Binding MotionSensorValue, Converter={StaticResource BoolToColorConverter}}" 
+                                    Height="40" 
+                                    CornerRadius="4"
+                                    Margin="0 0 0 10"/>
+
+                            <TextBlock Grid.Row="2" 
+                                    Text="{Binding MotionSensorText}" 
+                                    HorizontalAlignment="Center" 
+                                    FontSize="24"
+                                    FontWeight="Bold"/>
+
+                            <Button Grid.Row="3" 
+                                    Content="Toggle Value" 
+                                    Command="{Binding ToggleMotionSensorCommand}"
+                                    HorizontalAlignment="Center"
+                                    Margin="0 10 0 0"/>
+                        </Grid>
+
+                    </Border>
                 </Grid>
             </Grid>
         </Border>
 
-        <!-- Publish Controls -->
+        <!-- Event Log -->
         <Border Grid.Row="2" Classes="card">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0" Classes="header" Text="Publish Message"/>
-                
-                <Button Grid.Row="1" 
-                        Classes="primary"
-                        Content="Publish 'Hello' to house/kitchen/status" 
-                        Command="{Binding PublishHelloCommand}"
-                        IsEnabled="{Binding IsConnected}"/>
-            </Grid>
-        </Border>
-
-        <!-- Messages Display -->
-        <Border Grid.Row="3" Classes="card">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
-                <TextBlock Grid.Row="0" Classes="header" Text="Message Log"/>
+                <TextBlock Grid.Row="0" Classes="header" Text="Sensor Event Log"/>
                 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <Border Background="#f8f8f8"
@@ -144,23 +214,22 @@
                             BorderThickness="1"
                             CornerRadius="4"
                             Padding="10">
-                        <TextBlock Text="{Binding LastMessage}" 
+                        <TextBlock Text="{Binding EventLog}" 
                                    TextWrapping="Wrap"
                                    FontFamily="Consolas"
-                                   FontSize="14"
-                                   FontWeight="Medium"/>
+                                   FontSize="14"/>
                     </Border>
                 </ScrollViewer>
             </Grid>
         </Border>
 
         <!-- Footer -->
-        <StackPanel Grid.Row="4" 
+        <StackPanel Grid.Row="3" 
                    HorizontalAlignment="Center" 
                    Margin="0,5,0,0"
                    Orientation="Horizontal"
                    Spacing="5">
-            <TextBlock Text="IoT Planner - MQTT Client" 
+            <TextBlock Text="IoT Sensor Manager" 
                        FontSize="12"
                        Foreground="Gray"/>
             <TextBlock Text="•" 

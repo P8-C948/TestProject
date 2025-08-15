@@ -1,27 +1,27 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using TestProject.Avalonia;
 using TestProject.Core;
 
-namespace TestProject.GUI;
-
-public partial class App : Application
+namespace TestProject.GUI
 {
-    public override void Initialize()
+    public partial class App : Application
     {
-        AvaloniaXamlLoader.Load(this);
-    }
-
-    public override void OnFrameworkInitializationCompleted()
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        public override void Initialize()
         {
-            // Create the ViewModel instance and pass it to MainWindow
-            var viewModel = new TestProjectModel();
-            desktop.MainWindow = new MainWindow(viewModel);
+            AvaloniaXamlLoader.Load(this);
         }
 
-        base.OnFrameworkInitializationCompleted();
+        public override void OnFrameworkInitializationCompleted()
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                // Create the ViewModel instance and pass it to MainWindow
+                var viewModel = new TestProjectModel();
+                desktop.MainWindow = new MainWindow(viewModel);
+            }
+
+            base.OnFrameworkInitializationCompleted();
+        }
     }
 }
