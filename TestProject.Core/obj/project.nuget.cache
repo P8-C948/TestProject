@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0sbrKuPoJnU=",
+  "dgSpecHash": "Zf8T1H39Bbk=",
   "success": true,
   "projectFilePath": "/Users/iosifgogolos/TestProject/TestProject.Core/TestProject.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/iosifgogolos/.nuget/packages/mqttnet/5.0.1.1416/mqttnet.5.0.1.1416.nupkg.sha512"
+  ],
   "logs": []
 }

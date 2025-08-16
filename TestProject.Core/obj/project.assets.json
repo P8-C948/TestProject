@@ -1,11 +1,42 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "MQTTnet/5.0.1.1416": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/MQTTnet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/MQTTnet.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MQTTnet/5.0.1.1416": {
+      "sha512": "ONYieEMaHiIei5dAtHXywnfJGhmrd5Av5sNJSQERp6AtZdPk3xxjCR6Cv0C5RUr/XbLeHO4/HQ0Rc2bQ5NF5Mw==",
+      "type": "package",
+      "path": "mqttnet/5.0.1.1416",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net8.0/MQTTnet.dll",
+        "lib/net8.0/MQTTnet.xml",
+        "mqttnet.5.0.1.1416.nupkg.sha512",
+        "mqttnet.nuspec",
+        "nuget.png"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "MQTTnet >= 5.0.1.1416"
+    ]
   },
   "packageFolders": {
     "/Users/iosifgogolos/.nuget/packages/": {}
@@ -50,6 +81,12 @@
     "frameworks": {
       "net9.0": {
         "targetAlias": "net9.0",
+        "dependencies": {
+          "MQTTnet": {
+            "target": "Package",
+            "version": "[5.0.1.1416, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
