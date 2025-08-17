@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yyYQXQNy+dw=",
+  "dgSpecHash": "vPNj4kgIWXM=",
   "success": true,
   "projectFilePath": "/Users/iosifgogolos/TestProject/TestProject.GUI/TestProject.GUI.csproj",
   "expectedPackageFiles": [
@@ -25,7 +25,6 @@
     "/Users/iosifgogolos/.nuget/packages/harfbuzzsharp.nativeassets.webassembly/8.3.1.1/harfbuzzsharp.nativeassets.webassembly.8.3.1.1.nupkg.sha512",
     "/Users/iosifgogolos/.nuget/packages/harfbuzzsharp.nativeassets.win32/8.3.1.1/harfbuzzsharp.nativeassets.win32.8.3.1.1.nupkg.sha512",
     "/Users/iosifgogolos/.nuget/packages/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg.sha512",
-    "/Users/iosifgogolos/.nuget/packages/microsoft.aspnetcore.authentication.microsoftaccount/9.0.8/microsoft.aspnetcore.authentication.microsoftaccount.9.0.8.nupkg.sha512",
     "/Users/iosifgogolos/.nuget/packages/mqttnet/5.0.1.1416/mqttnet.5.0.1.1416.nupkg.sha512",
     "/Users/iosifgogolos/.nuget/packages/skiasharp/2.88.9/skiasharp.2.88.9.nupkg.sha512",
     "/Users/iosifgogolos/.nuget/packages/skiasharp.nativeassets.linux/2.88.9/skiasharp.nativeassets.linux.2.88.9.nupkg.sha512",

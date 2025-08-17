@@ -457,22 +457,6 @@
           "lib/net5.0/MicroCom.Runtime.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Authentication.MicrosoftAccount/9.0.8": {
-        "type": "package",
-        "compile": {
-          "lib/net9.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll": {
-            "related": ".xml"
-          }
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
       "MQTTnet/5.0.1.1416": {
         "type": "package",
         "compile": {
@@ -1225,21 +1209,6 @@
         "microcom.runtime.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Authentication.MicrosoftAccount/9.0.8": {
-      "sha512": "4zDWWLt9nW9fiowkA0J5F4kxGqQk2V+0jKP/+ZRVfH6PlMG/HtSYa2Yib2pVyaD2mUsgxP6A9Yt6X203oLRneg==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.authentication.microsoftaccount/9.0.8",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net9.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll",
-        "lib/net9.0/Microsoft.AspNetCore.Authentication.MicrosoftAccount.xml",
-        "microsoft.aspnetcore.authentication.microsoftaccount.9.0.8.nupkg.sha512",
-        "microsoft.aspnetcore.authentication.microsoftaccount.nuspec"
-      ]
-    },
     "MQTTnet/5.0.1.1416": {
       "sha512": "ONYieEMaHiIei5dAtHXywnfJGhmrd5Av5sNJSQERp6AtZdPk3xxjCR6Cv0C5RUr/XbLeHO4/HQ0Rc2bQ5NF5Mw==",
       "type": "package",
@@ -1489,7 +1458,6 @@
       "Avalonia.Diagnostics >= 11.3.3",
       "Avalonia.Fonts.Inter >= 11.3.3",
       "Avalonia.Themes.Fluent >= 11.3.3",
-      "Microsoft.AspNetCore.Authentication.MicrosoftAccount >= 9.0.8",
       "TestProject.Core >= 1.0.0"
     ]
   },
@@ -1560,10 +1528,6 @@
           "Avalonia.Themes.Fluent": {
             "target": "Package",
             "version": "[11.3.3, )"
-          },
-          "Microsoft.AspNetCore.Authentication.MicrosoftAccount": {
-            "target": "Package",
-            "version": "[9.0.8, )"
           }
         },
         "imports": [

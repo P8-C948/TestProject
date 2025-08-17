@@ -29,6 +29,7 @@
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/9.0.7/ref/net9.0/Microsoft.VisualBasic.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/9.0.7/ref/net9.0/Microsoft.Win32.Primitives.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/9.0.7/ref/net9.0/Microsoft.Win32.Registry.dll
+/Users/iosifgogolos/.nuget/packages/mqttnet/5.0.1.1416/lib/net8.0/MQTTnet.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/9.0.7/ref/net9.0/mscorlib.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/9.0.7/ref/net9.0/netstandard.dll
 /Users/iosifgogolos/.nuget/packages/skiasharp/2.88.9/lib/net6.0/SkiaSharp.dll

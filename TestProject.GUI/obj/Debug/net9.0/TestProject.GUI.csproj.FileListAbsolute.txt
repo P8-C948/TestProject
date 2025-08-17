@@ -147,3 +147,4 @@ C:/Users/konto/learn_cs/TestProject.GUI/obj/Debug/net9.0/ref/TestProject.GUI.dll
 /Users/iosifgogolos/TestProject/TestProject.GUI/obj/Debug/net9.0/TestProj.59790CFE.Up2Date
 /Users/iosifgogolos/TestProject/TestProject.GUI/obj/Debug/net9.0/TestProject.GUI.genruntimeconfig.cache
 /Users/iosifgogolos/TestProject/TestProject.GUI/obj/Debug/net9.0/ref/TestProject.GUI.dll
+/Users/iosifgogolos/TestProject/TestProject.GUI/bin/Debug/net9.0/MQTTnet.dll
