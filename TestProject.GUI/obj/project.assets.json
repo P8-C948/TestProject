@@ -457,6 +457,19 @@
           "lib/net5.0/MicroCom.Runtime.dll": {}
         }
       },
+      "MQTTnet/5.0.1.1416": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/MQTTnet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/MQTTnet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "SkiaSharp/2.88.9": {
         "type": "package",
         "dependencies": {
@@ -586,6 +599,9 @@
       "TestProject.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "MQTTnet": "5.0.1.1416"
+        },
         "compile": {
           "bin/placeholder/TestProject.Core.dll": {}
         },
@@ -1191,6 +1207,20 @@
         "lib/netstandard2.0/MicroCom.Runtime.dll",
         "microcom.runtime.0.11.0.nupkg.sha512",
         "microcom.runtime.nuspec"
+      ]
+    },
+    "MQTTnet/5.0.1.1416": {
+      "sha512": "ONYieEMaHiIei5dAtHXywnfJGhmrd5Av5sNJSQERp6AtZdPk3xxjCR6Cv0C5RUr/XbLeHO4/HQ0Rc2bQ5NF5Mw==",
+      "type": "package",
+      "path": "mqttnet/5.0.1.1416",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net8.0/MQTTnet.dll",
+        "lib/net8.0/MQTTnet.xml",
+        "mqttnet.5.0.1.1416.nupkg.sha512",
+        "mqttnet.nuspec",
+        "nuget.png"
       ]
     },
     "SkiaSharp/2.88.9": {

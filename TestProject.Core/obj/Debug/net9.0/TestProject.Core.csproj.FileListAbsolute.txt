@@ -21,3 +21,4 @@ C:/Users/konto/learn_cs/TestProject.Core/obj/Debug/net9.0/ref/TestProject.Core.d
 /Users/iosifgogolos/TestProject/TestProject.Core/obj/Debug/net9.0/refint/TestProject.Core.dll
 /Users/iosifgogolos/TestProject/TestProject.Core/obj/Debug/net9.0/TestProject.Core.pdb
 /Users/iosifgogolos/TestProject/TestProject.Core/obj/Debug/net9.0/ref/TestProject.Core.dll
+/Users/iosifgogolos/TestProject/TestProject.Core/obj/Debug/net9.0/TestProject.Core.csproj.AssemblyReference.cache
